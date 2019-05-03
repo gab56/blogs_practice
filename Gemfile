@@ -37,6 +37,15 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'bootstrap', '~> 4.3.1'
+
+gem 'rubocop', require: false
+
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+
+gem 'jquery-rails'
+
+
 # Run against the latest stable release
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'
@@ -55,6 +64,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
 
 
