@@ -1,6 +1,10 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get 'posts/index', to: 'posts#index'
+  get 'posts/show', to: 'posts#show'
+
+  get 'users/index', to: 'users#index'
+  get 'users/show', to: 'users#show'
+
 end
