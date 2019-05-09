@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
+  resources :posts do
+    resources :comments
+  end
 
-  get 'posts/index', to: 'posts#index'
-  get 'posts/:id/show', to: 'posts#show'
+  get "users/index", to: "users#index"
 
-  get 'users/index', to: 'users#index'
-  get 'users:id/show', to: 'users#show'
-
+  root to: "posts#index"
 end

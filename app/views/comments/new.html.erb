@@ -1,0 +1,13 @@
+<h1>Add new comment to a post</h1>
+
+<%= form_for([@post, @comment]) do |form| %>
+
+  <div class="field">
+    <%= form.label :message %>
+    <%= form.text_area :message %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

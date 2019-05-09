@@ -1,8 +1,15 @@
 <h1>All posts</h1>
 
-<% @post_item.each do |item| %>
-    <p><%= item.title %></p> 
-    <p><%= item.content %></p> 
-    <p><%= item.user_id %></p>  
-    <p><%= item.opened %></p> 
+<%= link_to 'Create new item', new_post_path %>
+
+<% @posts.each do |item| %>
+  <p>Title: <%= link_to item.title, post_path(item.id) %></p>
+  <p>Content: <%= item.content %></p>
+  <p>Created by:<%= item.user_id %></p>
+  <p>Opened: <%= item.opened %></p>
+  <% if @currentUser === item.user_id %>
+    <%= link_to 'Edit', edit_post_path(item.id) %>
+    <%= link_to 'Delete', post_path(item.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+  <%= link_to 'Comment', new_post_comment_path(item.id) %>
 <% end %>

@@ -1,5 +1,17 @@
-<h1><%= @post_item.title %></h1>
+<h1><%= @post.title %></h1>
 
-<em><%= @post_item.content %></em>
+<em><%= @post.content %></em>
 
-<p><%= @post_item.opened %></p>
+<p>Opened: <%= @post.opened %></p>
+
+<h2>Comments</h2>
+
+<% @comments.each do |item| %>
+  <p>Comment: <p>
+  <p><%= item.message %><p>
+  <% if @currentUser === item.user_id %>
+    <%= link_to 'Edit', edit_post_comment_path(item.post_id, item.id) %>
+    <%= link_to 'Delete', post_comment_path(item.post_id, item.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+

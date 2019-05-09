@@ -1,31 +1,28 @@
 # frozen_string_literal: true
 
-class PostsController < ApplicationController
+class CommentsController < ApplicationController
 
-  before_action :set_post, only: %i[show edit update]
+  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[new edit update destroy]
   before_action :authenticate_user!, only: %i[new edit destroy]
 
   def index
-    @posts = Post.all
-    return unless user_signed_in?
-      @currentUser = current_user.id
+    @comments = Comment.all
   end
 
-  def show
-    return unless user_signed_in?
-      @currentUser = current_user.id
-    @comments = Comment.where(post_id: params[:id])
-  end
+  def show; end
 
   def new
-    @post = Post.new
+    @comment = Comment.new
   end
 
   def create
     @current_user = current_user.id
-    @post = Post.new(params.require(:post).permit(:title ,:content ,:opened).merge(:user_id => @current_user))
+    @comment = Comment.new(params.require(:comment).permit(:message)
+    .merge(user_id: @current_user, post_id: params[:post_id]))
+
     respond_to do |format|
-      if @post.save
+      if @comment.save
         format.html { redirect_to posts_path }
       else
         format.html { render :new }
@@ -37,27 +34,30 @@ class PostsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @post.update(params.require(:post).permit(:title,:content))
-        format.html { redirect_to posts_path}
+      if @comment.update(params.require(:comment).permit(:message))
+        format.html { redirect_to posts_path }
       else
         format.html { render :edit }
       end
-
     end
-
   end
 
   def destroy
-    @post.destroy
+    @comment.destroy
     respond_to do |format|
       format.html { redirect_to posts_path }
     end
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])
   end
 
 end
