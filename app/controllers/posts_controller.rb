@@ -3,17 +3,13 @@
 class PostsController < ApplicationController
 
   before_action :set_post, only: %i[show edit update]
-  before_action :authenticate_user!, only: %i[new edit destroy]
+  skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
     @posts = Post.all
-    return unless user_signed_in?
-      @currentUser = current_user.id
   end
 
   def show
-    return unless user_signed_in?
-      @currentUser = current_user.id
     @comments = Comment.where(post_id: params[:id])
   end
 
@@ -23,7 +19,7 @@ class PostsController < ApplicationController
 
   def create
     @current_user = current_user.id
-    @post = Post.new(params.require(:post).permit(:title ,:content ,:opened).merge(:user_id => @current_user))
+    @post = Post.new(posts_params.merge(user_id: @current_user))
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_path }
@@ -37,14 +33,12 @@ class PostsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @post.update(params.require(:post).permit(:title,:content))
-        format.html { redirect_to posts_path}
+      if @post.update(posts_params)
+        format.html { redirect_to posts_path }
       else
         format.html { render :edit }
       end
-
     end
-
   end
 
   def destroy
@@ -55,9 +49,13 @@ class PostsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def posts_params
+    params.require(:post).permit(:title, :content, :opened)
   end
 
 end

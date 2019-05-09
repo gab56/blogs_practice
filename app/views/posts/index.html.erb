@@ -7,7 +7,7 @@
   <p>Content: <%= item.content %></p>
   <p>Created by:<%= item.user_id %></p>
   <p>Opened: <%= item.opened %></p>
-  <% if @currentUser === item.user_id %>
+  <% if user_signed_in? && current_user.id === item.user_id %>
     <%= link_to 'Edit', edit_post_path(item.id) %>
     <%= link_to 'Delete', post_path(item.id), method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
