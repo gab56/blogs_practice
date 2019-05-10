@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(version: 2019_05_09_205720) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.integer "identificacion", null: false
+    t.integer "identificacion", default: 0, null: false
     t.string "phone_number", limit: 9, default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.bigint "user_id"
-    t.index ["user_id"], name: "index_people_on_user_id"
+    t.index ["user_id"], name: "index_people_on_user_id", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
