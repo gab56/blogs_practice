@@ -1,0 +1,17 @@
+<h1><%= @post.title %></h1>
+
+<em><%= @post.content %></em>
+
+<p>Opened: <%= @post.opened %></p>
+
+<h2>Comments</h2>
+
+<% @comments.each do |item| %>
+  <p>Comment: <p>
+  <p><%= item.message %><p>
+  <% if  user_signed_in? && current_user.id === item.user_id %>
+    <%= link_to 'Edit', edit_post_comment_path(item.post_id, item.id) %>
+    <%= link_to 'Delete', post_comment_path(item.post_id, item.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+
