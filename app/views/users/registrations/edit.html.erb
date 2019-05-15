@@ -36,6 +36,30 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <%= f.fields_for :person, @user.person || @user.build_person do |person_fields| %>
+
+    <div class="field">
+      <%= person_fields.label :first_name %>
+      <%= person_fields.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= person_fields.label :last_name %>
+      <%= person_fields.text_field :last_name %>
+    </div>
+
+    <div class="field">
+      <%= person_fields.label :identificacion %>
+      <%= person_fields.text_field :identificacion %>
+    </div>
+
+    <div class="field">
+      <%= person_fields.label :phone_number %>
+      <%= person_fields.text_field :phone_number %>
+    </div>
+
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

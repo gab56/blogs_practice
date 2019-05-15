@@ -3,4 +3,9 @@
 <% @users.each do |item| %>
     <p><%= item.email %></p>
     <p><%= item.username %></p>
+    <p>Personal data:<p>
+    <p>First name: <%= item.person.first_name %></p>
+    <p>Last name: <%= item.person.last_name %></p>
+    <p>Id: <%= item.person.identificacion %></p>
+    <p>Phone number: <%= item.person.phone_number %></p>
 <% end %>

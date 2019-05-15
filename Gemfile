@@ -25,6 +25,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rspec-rails", "~> 3.8"
   gem "rubocop-rspec"
+  gem "pry-byebug"
 end
 group :development do
   gem "listen", ">= 3.0.5", "< 3.2"
