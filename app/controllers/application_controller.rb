@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
 
   def user_params
     [
-      :username, :email, :password, :password_confirmation, :remember_me, person_attributes: [
-        :identificacion, :first_name, :last_name, :phone_number
+      :username, :email, :password, :password_confirmation, :remember_me, person_attributes: %i[
+        identificacion first_name last_name phone_number
       ]
     ]
   end

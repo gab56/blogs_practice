@@ -17,6 +17,8 @@
     <%= form.check_box :opened %>
   </div>
 
+  <%= form.select :category_ids, options_for_select(@categories.map{ |category| [category.name, category.id] }), { prompt: "Select categories" }, { multiple: true } %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
