@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :categories
+
   get "users/index", to: "users#index"
 
   root to: "posts#index"

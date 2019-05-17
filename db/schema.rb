@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_194105) do
+ActiveRecord::Schema.define(version: 2019_05_15_164452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "message", null: false
@@ -44,6 +50,15 @@ ActiveRecord::Schema.define(version: 2019_05_09_194105) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "posts_categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "post_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_posts_categories_on_category_id"
+    t.index ["post_id"], name: "index_posts_categories_on_post_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username", limit: 50, default: "", null: false
@@ -61,4 +76,6 @@ ActiveRecord::Schema.define(version: 2019_05_09_194105) do
   add_foreign_key "comments", "users"
   add_foreign_key "people", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "posts_categories", "categories"
+  add_foreign_key "posts_categories", "posts"
 end

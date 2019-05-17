@@ -1,0 +1,13 @@
+<h1>Add new category</h1>
+
+<%= form_for(@category) do |form| %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

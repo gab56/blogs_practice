@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @categories = Category.all
   end
 
   def create
@@ -55,7 +56,7 @@ class PostsController < ApplicationController
   end
 
   def posts_params
-    params.require(:post).permit(:title, :content, :opened)
+    params.require(:post).permit(:title, :content, :opened, category_ids: [])
   end
 
 end
