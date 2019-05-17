@@ -4,6 +4,15 @@
 
 <p>Opened: <%= @post.opened %></p>
 
+<% if user_signed_in? %>
+  <% if @ranking.exists? %>
+    <p>Ranking: <%= @ranking.last.rank %></p>
+    <%= link_to 'Rank', edit_post_ranking_path(@post.id, @ranking.last.id) %>
+  <% else %>
+    <%= link_to 'Rank', new_post_ranking_path(@post.id) %>
+    <% end %>
+<% end %>
+
 <h2>Comments</h2>
 
 <% @comments.each do |item| %>
