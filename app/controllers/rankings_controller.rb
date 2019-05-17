@@ -2,10 +2,11 @@
 
 class RankingsController < ApplicationController
 
+  OPTIONS = %i[1 2 3 4 5 6 7 8 9 10]
+
   def new
     @ranking = Ranking.new
     @post = Post.find(params[:post_id])
-    @rank_positions = %i[1 2 3 4 5 6 7 8 9 10]
   end
 
   def create
@@ -18,10 +19,6 @@ class RankingsController < ApplicationController
         format.html { render :new }
       end
     end
-  end
-
-  def posts_params
-    params.require(:ranking).permit(:rank)
   end
 
   def edit
@@ -39,6 +36,14 @@ class RankingsController < ApplicationController
         format.html { render :edit }
       end
     end
+  end
+
+  def self.OPTIONS
+    return OPTIONS
+  end
+
+  def posts_params
+    params.require(:ranking).permit(:rank)
   end
 
 end

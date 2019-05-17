@@ -4,7 +4,7 @@
 
   <div class="field">
     <%= form.label :rank %>
-    <%= form.select :rank, options_for_select(@rank_positions) %>
+    <%= form.select :rank, options_for_select(RankingsController.OPTIONS) %>
   </div>
 
   <div class="actions">

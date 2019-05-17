@@ -5,12 +5,12 @@
 <p>Opened: <%= @post.opened %></p>
 
 <% if user_signed_in? %>
-  <% if @ranking.exists? %>
-    <p>Ranking: <%= @ranking.last.rank %></p>
-    <%= link_to 'Rank', edit_post_ranking_path(@post.id, @ranking.last.id) %>
+<p>Ranking: <%= @ranking %></p>
+  <% if !@rankings.blank? %>
+    <%= link_to 'Rank', edit_post_ranking_path(@post.id, @post.rankings.last.id) %>
   <% else %>
     <%= link_to 'Rank', new_post_ranking_path(@post.id) %>
-    <% end %>
+  <% end %>
 <% end %>
 
 <h2>Comments</h2>
