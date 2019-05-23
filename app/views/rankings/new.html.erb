@@ -1,0 +1,13 @@
+<h1>Rank post</h1>
+
+<%= form_for([@post, @ranking]) do |form| %>
+
+  <div class="field">
+    <%= form.label :rank %>
+    <%= form.select :rank, options_for_select(RankingsController.OPTIONS) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

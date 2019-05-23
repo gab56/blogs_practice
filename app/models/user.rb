@@ -7,6 +7,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy
+
+  has_many :rankings, dependent: :destroy
+  has_many :posts, through: :rankings
+
   has_one :person, dependent: :destroy
   accepts_nested_attributes_for :person
 

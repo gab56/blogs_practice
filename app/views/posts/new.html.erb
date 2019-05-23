@@ -9,12 +9,7 @@
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_field :content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :opened %>
-    <%= form.check_box :opened %>
+    <%= form.text_area :content %>
   </div>
 
   <%= form.select :category_ids, options_for_select(@categories.map{ |category| [category.name, category.id] }), { prompt: "Select categories" }, { multiple: true } %>

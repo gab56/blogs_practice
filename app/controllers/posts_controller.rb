@@ -11,6 +11,9 @@ class PostsController < ApplicationController
 
   def show
     @comments = Comment.where(post_id: params[:id])
+    @rankings = Ranking.where(user_id: current_user.id, post_id: @post.id)
+    @ranking = @post.rankings.sum(:rank) / @post.rankings.count unless @post.rankings.count == 0
+    @post.update(opened: true) if !current_user || current_user.id != @post.user.id
   end
 
   def new
@@ -30,7 +33,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @categories = Category.all
+  end
 
   def update
     respond_to do |format|

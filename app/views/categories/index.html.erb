@@ -3,3 +3,5 @@
 <% @categories.each do |item| %>
   <p>Category: <%= link_to item.name, category_path(item.id) %></p>
 <% end %>
+
+<%= link_to 'Back', posts_path %>
